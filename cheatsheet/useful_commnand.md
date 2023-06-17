@@ -1,10 +1,27 @@
 # Useful command
 
+## Auto completion
+```shell
+# AWS
+# ref: https://docs.aws.amazon.com/zh_tw/cli/latest/userguide/cli-configure-completion.html
+
+# Pulumi
+# ref: https://www.pulumi.com/docs/reference/cli/pulumi_gen-completion/
+
+# Vault
+# ref: https://developer.hashicorp.com/vault/docs/commands#autocompletion
+vault -autocomplete-install
+# Kubeclt
+# Bash
+echo "source <(kubectl completion zsh)" >> ~/.bashrc
+# Zsh
+echo "source <(kubectl completion zsh)" >> ~/.zshrc
+```
+
 ## curl specific domain and ip 
 ```shell
 curl https://rtb.tenmax.io/hello --resolve 'rtb.tenmax.io:443:10.10.128.11'
 ```
-
 
 ## smbclient
 ```shell
