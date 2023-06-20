@@ -8,7 +8,7 @@ wsl install -d debian
 ## Install general tools
 ```shell
 sudo apt update -y
-sudo apt install vim curl wget dnsutils -y
+sudo apt install vim curl wget dnsutils git ssh -y
 ```
 
 ## Change visudo editor
