@@ -8,7 +8,7 @@ wsl install -d debian
 ## Install general tools
 ```shell
 sudo apt update -y
-sudo apt install vim curl wget dnsutils git ssh -y
+sudo apt install vim curl wget dnsutils git ssh whois kubectl python3-utils -y
 ```
 
 ## Change visudo editor
@@ -17,12 +17,14 @@ update-alternatives --config editor
 <username> ALL=(ALL) NOPASSWD:ALL
 ```
 
-## Install Fish
+## Fish
+### Install Fish
 ```shell
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
 curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
 sudo apt update
 sudo apt install fish
+
 # Install fisher and plugins
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 fisher install IlanCosman/tide@v5
@@ -33,14 +35,37 @@ fisher install jorgebucaran/autopair.fish
 ref: https://linuxhint.com/install_fish_shell_linux/
 ref: https://www.kwchang0831.dev/dev-env/ubuntu/fish
 
-## Set fish alias
+### Set fish alias
 ```shell
 vim vim ~/.config/fish/config.fish
 alias l='ls -al --color=always'
-
 ```
 
+### Adjust prompt
+```shell
+set --universal tide_left_prompt_items pwd git newline character kubectl
+```
 
+## Install poetry
+```shell
+# Install
+curl -sSL https://install.python-poetry.org | python3 -
+
+# autocompletion
+poetry completions fish > ~/.config/fish/completions/poetry.fish
+
+# configure venv inside project
+poetry config virtualenvs.in-project true
+
+```
+ref: https://blog.kyomind.tw/python-poetry
+
+## Vscode
+```shell
+# Terminal font: setting.json 
+"terminal.integrated.fontFamily": "MesloLGS NF"
+
+```
 
 
 ## Install zim
@@ -49,7 +74,7 @@ alias l='ls -al --color=always'
 curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 ```
 
-## download powerline font(MesloLGS NF as example)
+## download powerline font
 - https://github.com/romkatv/powerlevel10k-media/blob/master/MesloLGS%20NF%20Regular.ttf
 
 

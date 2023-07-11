@@ -4,6 +4,12 @@
 ### kubectl
 - install 
 ```shell
+# Linux
+# X86-64
+ curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+# MAC
+# AMR 64
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.1/2023-04-19/bin/darwin/amd64/kubectl
 # Apply execute permissions to the binary.
 chmod +x ./kubectl

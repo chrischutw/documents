@@ -100,6 +100,9 @@ ex:
 docker run -it -v /root/pixencoder-data:/root/pixencoder-data --name pixencoder pixnet-encoder:202011161517 bash
 ```
 
+## Manage Docker as a non-root user
+```shell
+```
 
 ## Docker rm containers
 - List all the containers
