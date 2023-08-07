@@ -1,9 +1,13 @@
 # WSL Linux Setup
 
-## WSL install Debian
+## WSL installation
 ```shell
-wsl install -d debian
+# List all Linux distributions 
+wsl -l -o 
+# Install one of them 
+wsl install -d `DistributionName`
 ```
+ref: https://learn.microsoft.com/zh-tw/windows/wsl/install
 
 ## Install general tools
 ```shell
