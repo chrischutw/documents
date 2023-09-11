@@ -12,7 +12,7 @@ ref: https://learn.microsoft.com/zh-tw/windows/wsl/install
 ## Install general tools
 ```shell
 sudo apt update -y
-sudo apt install vim curl wget dnsutils git ssh whois kubectl python3-utils -y
+sudo apt install vim curl wget dnsutils git ssh whois -y
 ```
 
 ## Change visudo editor
@@ -22,22 +22,33 @@ update-alternatives --config editor
 ```
 
 ## Fish
-### Install Fish
+### Install Fish in Debian 11
+ref: https://linuxhint.com/install_fish_shell_linux
 ```shell
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
 curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
 sudo apt update
 sudo apt install fish
+```
 
-# Install fisher and plugins
+### Install Fish in Ubuntu-22.04
+ref: https://www.kwchang0831.dev/dev-env/ubuntu/fish
+```shell
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt update
+sudo apt install fish
+chsh -s $(which fish)
+
+```
+
+### Install fisher and plugins
+```shell
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
 fisher install IlanCosman/tide@v5
 fisher install jethrokuan/z
 fisher install andreiborisov/sponge
 fisher install jorgebucaran/autopair.fish
 ```
-ref: https://linuxhint.com/install_fish_shell_linux/
-ref: https://www.kwchang0831.dev/dev-env/ubuntu/fish
 
 ### Set fish alias
 ```shell
@@ -49,6 +60,13 @@ alias l='ls -al --color=always'
 ```shell
 set --universal tide_left_prompt_items pwd git newline character kubectl
 ```
+
+## Install asdf 
+ref: https://asdf-vm.com/guide/getting-started.html
+```shell
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.0
+```
+
 
 ## Install poetry
 ```shell
