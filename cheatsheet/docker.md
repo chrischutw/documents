@@ -1,4 +1,4 @@
-# Docker cheatsheet
+# Docker Cheatsheet
 
 ## Docker install shell 
 ```shell
