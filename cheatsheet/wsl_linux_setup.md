@@ -9,17 +9,20 @@ wsl install -d `DistributionName`
 ```
 ref: https://learn.microsoft.com/zh-tw/windows/wsl/install
 
+
 ## Install general tools
 ```shell
 sudo apt update -y
-sudo apt install vim curl wget dnsutils git ssh whois -y
+sudo apt install vim curl wget dnsutils git ssh whois tmux -y
 ```
+
 
 ## Change visudo editor
 ```shell
 update-alternatives --config editor
 <username> ALL=(ALL) NOPASSWD:ALL
 ```
+
 
 ## Fish
 ### Install Fish in Debian 11
@@ -50,11 +53,19 @@ fisher install andreiborisov/sponge
 fisher install jorgebucaran/autopair.fish
 ```
 
+### Install fzf
+```shell
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
+
 ### Set fish alias
 ```shell
-vim vim ~/.config/fish/config.fish
+vim ~/.config/fish/config.fish
 alias l='ls -al --color=always'
 ```
+
 
 ### Adjust prompt
 ```shell
@@ -78,15 +89,14 @@ poetry completions fish > ~/.config/fish/completions/poetry.fish
 
 # configure venv inside project
 poetry config virtualenvs.in-project true
-
 ```
 ref: https://blog.kyomind.tw/python-poetry
+
 
 ## Vscode
 ```shell
 # Terminal font: setting.json 
 "terminal.integrated.fontFamily": "MesloLGS NF"
-
 ```
 
 
@@ -96,8 +106,10 @@ ref: https://blog.kyomind.tw/python-poetry
 curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 ```
 
+
 ## download powerline font
 - https://github.com/romkatv/powerlevel10k-media/blob/master/MesloLGS%20NF%20Regular.ttf
+
 
 
 ## install module (powerlevel10k as example)
@@ -121,4 +133,35 @@ zimfw install
 - initial configuration
 ```shell
 p10k configure
+```
+
+
+## install latest k9s
+ref: https://github.com/derailed/k9s?tab=readme-ov-file#installation
+```shell
+# Linux
+curl -sS https://webinstall.dev/k9s | bash
+# Windows
+curl.exe -A MS https://webinstall.dev/k9s | powershell
+```
+
+
+## Istall gcloud CLI
+ref: https://cloud.google.com/sdk/docs/install#deb
+```shell
+sudo apt-get install apt-transport-https ca-certificates gnupg curl sudo -y
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+sudo apt-get update -y && sudo apt-get install google-cloud-cli -y 
+```
+
+
+## Install helm
+ref: https://helm.sh/docs/intro/install/
+```shell
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
 ```
