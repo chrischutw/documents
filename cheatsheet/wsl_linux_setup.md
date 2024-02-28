@@ -30,16 +30,16 @@ ref: https://linuxhint.com/install_fish_shell_linux
 ```shell
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
 curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
-sudo apt update
-sudo apt install fish
+sudo apt update -y &&\
+sudo apt install fish =-y
 ```
 
 ### Install Fish in Ubuntu-22.04
 ref: https://www.kwchang0831.dev/dev-env/ubuntu/fish
 ```shell
-sudo apt-add-repository ppa:fish-shell/release-3
-sudo apt update
-sudo apt install fish
+sudo apt-add-repository ppa:fish-shell/release-3 &&\
+sudo apt update -y &&\
+sudo apt install fish -y &&\
 chsh -s $(which fish)
 
 ```
@@ -75,7 +75,7 @@ set --universal tide_left_prompt_items pwd git newline character kubectl
 ## Install asdf 
 ref: https://asdf-vm.com/guide/getting-started.html
 ```shell
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 ```
 
 
