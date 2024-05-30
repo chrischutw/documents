@@ -5,7 +5,7 @@
 # List all Linux distributions 
 wsl -l -o 
 # Install one of them 
-wsl install -d `DistributionName`
+wsl --install -d `DistributionName`
 ```
 ref: https://learn.microsoft.com/zh-tw/windows/wsl/install
 
@@ -30,18 +30,17 @@ ref: https://linuxhint.com/install_fish_shell_linux
 ```shell
 echo 'deb http://download.opensuse.org/repositories/shells:/fish:/release:/3/Debian_11/ /' | sudo tee /etc/apt/sources.list.d/shells:fish:release:3.list
 curl -fsSL https://download.opensuse.org/repositories/shells:fish:release:3/Debian_11/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_fish_release_3.gpg > /dev/null
-sudo apt update
-sudo apt install fish
+sudo apt update -y &&\
+sudo apt install fish =-y
 ```
 
 ### Install Fish in Ubuntu-22.04
 ref: https://www.kwchang0831.dev/dev-env/ubuntu/fish
 ```shell
-sudo apt-add-repository ppa:fish-shell/release-3
-sudo apt update
-sudo apt install fish
+sudo apt-add-repository ppa:fish-shell/release-3 &&\
+sudo apt update -y &&\
+sudo apt install fish -y &&\
 chsh -s $(which fish)
-
 ```
 
 ### Install fisher and plugins
@@ -59,6 +58,17 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
+### Install fd, bat, fzf.fish
+```shell
+# Install fd
+sudo apt install fd-find -y
+sudo ln -s $(which fdfind)/usr/local/bin/fd
+# Install bat
+sudo apt install bat -y
+sudo ln -s $(which batcat) /usr/local/bin/bat
+# Install fzf
+fisher install PatrickF1/fzf.fish
+```
 
 ### Set fish alias
 ```shell
@@ -66,16 +76,17 @@ vim ~/.config/fish/config.fish
 alias l='ls -al --color=always'
 ```
 
-
 ### Adjust prompt
 ```shell
 set --universal tide_left_prompt_items pwd git newline character kubectl
 ```
 
-## Install asdf 
+### Install asdf 
 ref: https://asdf-vm.com/guide/getting-started.html
 ```shell
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.0
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+echo "source ~/.asdf/asdf.fish" >> ~/.config/fish/config.fish
+mkdir -p ~/.config/fish/completions; and ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions
 ```
 
 
