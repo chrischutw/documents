@@ -1,5 +1,45 @@
 # MYSQL command cheatsheet
 
+
+## Slave super read only
+ref: https://bugs.mysql.com/bug.php?id=84081
+```shell
+set global super_read_only=ON;
+
+mysql> show global variables like '%read_only';
++-----------------------+-------+
+| Variable_name         | Value |
++-----------------------+-------+
+| innodb_read_only      | OFF   |
+| read_only             | ON    |
+| super_read_only       | ON    |
+| transaction_read_only | OFF   |
+| tx_read_only          | OFF   |
++-----------------------+-------+
+5 rows in set (0.01 sec)
+# my.cnf
+super-read-only=ON
+```
+
+## Fix Last_SQL_Error
+ref: https://dev.mysql.com/doc/refman/5.7/en/set-global-sql-slave-skip-counter.html
+```shell
+# Stop the slave SQL thread
+STOP SLAVE;
+# Skip the problematic transaction
+SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;
+# Restart the slave SQL thread
+START SLAVE;
+```
+
+
+# Check master/slave status
+```shell
+SHOW MASTER STATUS\G;
+SHOW SLAVE STATUS\G;
+```
+
+
 ## Count table size
 ** replace database_name **
 ```shell
