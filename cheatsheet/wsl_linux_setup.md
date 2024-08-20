@@ -190,3 +190,16 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.
 sudo apt-get update
 sudo apt-get install helm
 ```
+
+
+## Github authentication
+```shell
+# Install github CLI
+sudo apt install gh
+
+# Create token and grant all permission for repo and read permission for the others
+https://github.com/settings/tokens
+
+# Login by token
+gh auth login
+```
