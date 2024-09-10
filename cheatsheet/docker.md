@@ -1,6 +1,7 @@
 # Docker Cheatsheet
 
-## Docker install shell 
+## Docker install shell
+
 ```shell
 echo "Uninstall old versions"
 sudo apt-get remove docker docker-engine docker.io containerd runc
@@ -38,10 +39,13 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 ```
 
-## Docker isolate 
-ref:https://dreamlab.net/en/blog/post/user-namespace-remapping-an-advanced-feature-to-protect-your-docker-environments/
-- edit /etc/docker/daemon.json 
+## Docker isolate
+
+ref:<https://dreamlab.net/en/blog/post/user-namespace-remapping-an-advanced-feature-to-protect-your-docker-environments/>
+
+- edit /etc/docker/daemon.json
 `vim /etc/docker/daemon`
+
 ```shell
 {
     "userns-remap": "default",
@@ -52,39 +56,44 @@ ref:https://dreamlab.net/en/blog/post/user-namespace-remapping-an-advanced-featu
     }
 }
 ```
+
 - edit /etc/{subuid, subgid}
 `vim /etc/subuid,gid`
 
 ```shell
 dockremap:1000000:65536
 ```
+
 - restart docker daemon
 `sudo /etc/init.d/docker restart`
 
+## Docker ps
 
-## Docker ps 
 Docker ps --format "table {{.placeholder}}"
+
 ```shell
-Placeholder	Description
-.ID	Container ID
-.Image	Image ID
-.Command	Quoted command
-.CreatedAt	Time when the container was created.
-.RunningFor	Elapsed time since the container was started.
-.Ports	Exposed ports.
-.Status	Container status.
-.Size	Container disk size.
-.Names	Container names.
-.Labels	All labels assigned to the container.
-.Label	Value of a specific label for this container. For example ‘’
-.Mounts	Names of the volumes mounted in this container.
-.Networks	Names of the networks attached to this container.
+Placeholder Description
+.ID Container ID
+.Image Image ID
+.Command Quoted command
+.CreatedAt Time when the container was created.
+.RunningFor Elapsed time since the container was started.
+.Ports Exposed ports.
+.Status Container status.
+.Size Container disk size.
+.Names Container names.
+.Labels All labels assigned to the container.
+.Label Value of a specific label for this container. For example ‘’
+.Mounts Names of the volumes mounted in this container.
+.Networks Names of the networks attached to this container.
 ```
+
 ## docker logs
-ref: https://docs.docker.com/engine/reference/commandline/logs/
 
+ref: <https://docs.docker.com/engine/reference/commandline/logs/>
 
-## Docker build 
+## Docker build
+
 ```shell
 docker build -t pixnet-rabbitmq:2020100809 -f Dockerfile . --no-cache
 
@@ -92,7 +101,8 @@ docker build -t pixnet-rabbitmq:`date "+%Y%m%d%H%M" -f Docekrfile . --no-cache
 
 ```
 
-## Docker run image 
+## Docker run image
+
 ```shell
 docker run -it -v `docker_path:host_path` --name `name` `image:tag` 
 
@@ -101,61 +111,81 @@ docker run -it -v /root/pixencoder-data:/root/pixencoder-data --name pixencoder 
 ```
 
 ## Manage Docker as a non-root user
+
 ```shell
 ```
 
 ## Docker rm containers
+
 - List all the containers
+
 ```shell
 docker ps -a --no-trunc
 ```
+
 - Delete containers
+
 ```shell
 docker rm `container_id`
 ```
 
 ## Docker images
+
 - List images
+
 ```shell
 docker images
 ```
-- Delete images 
+
+- Delete images
+
 ```shell
 docker rmi image
 ```
 
-## Docker run 
+## Docker run
+
 ```shell
 docker run -d --hostname rabbitmq --name rabbitmq -p 5671:5671 -p 5672:5672 -p 15672:15672 -p 15692:15692 docker-registry.pixnet.systems:5000/pixnet/rabbitmq:latest
 ```
 
 ## Docker restart container
+
 docker exec -it prometheus kill -HUP 1 ; docker logs --tail 10 prometheus
 
 ## Docker tag
+
 ```shell
 docker tag pixnet-rabbitmq:2020100809 pixnet-rabbitmq:latest
 docker tag pixnet-rabbitmq:2020100809 docker-registry.pixnet.systems:5000/pixnet/rabbitmq:2020100809
 docker tag pixnet-phpmyadmin:latest docker-registry.pixnet.systems:5000/pixnet/rabbitmq:latest
 ```
+
 ## Docker push
+
 ```shell
 docker push docker-registry.pixnet.systems:5000/pixnet/rabbitmq:2020100809
 docker push docker-registry.pixnet.systems:5000/pixnet/rabbitmq:latest
 ```
 
-## Get docker registry 
-ref: https://docs.docker.com/registry/spec/api/#introduction
+## Get docker registry
+
+ref: <https://docs.docker.com/registry/spec/api/#introduction>
+
 - Get all registry
+
 ```shell
 curl -X GET https://docker-registry.pixnet.systems:5000/v2/_catalog
 ```
+
 - Get certain image tags
+
 ```shell
 curl -X GET https://docker-registry.pixnet.systems:5000/v2/pixnet/rabbitmq/tags/list
 ```
 
 ## NFS volumns
+
 ```shell
 services:
   xxx:
@@ -176,8 +206,11 @@ volumes:
 ```
 
 ## CIFS
-ref: https://docs.docker.com/storage/volumes/
+
+ref: <https://docs.docker.com/storage/volumes/>
+
 - docker create volume
+
 ```shell
 docker volume create --driver local -opt type=cifs \
   --opt device=//tenmaxsgwarehouse.file.core.windows.net:airflow-dag-stage \
@@ -186,30 +219,36 @@ docker volume create --driver local -opt type=cifs \
 ```
 
 - docker run with volume
+
 ```shell
 docker run --rm --name airflow-dag-prod -v airflow-dag-prod:/tmp debian:stable
 ```
 
 - docker run with CIFS
+
 ```shell
 docker run --rm --name airflow-dag-prod \
   --mount 'src=airflow-dag-prod,target=/app,volume-driver=local,volume-opt=type=cifs,volume-opt=device=//tenmaxsgwarehouse.file.core.windows.net/airflow-dag-prod,"volume-opt=o=addr=tenmaxsgwarehouse.file.core.windows.net,username="username",password="password",file_mode=0777,dir_mode=0777"' \
   debian:stable
 ```
 
+## error log
 
-## error log 
 The official httpd driver changes the httpd application’s configuration to write its normal output directly to /proc/self/fd/1 (which is STDOUT) and its errors to /proc/self/fd/2 (which is STDERR). See the Dockerfile.
 
 ## add user to docker group
+
 ```shell
 sudo gpasswd -a $USER docker
 sudo usermod -aG docker $USER
 ```
 
 ## Purge container log
-ref: https://www.axllent.org/docs/clear-docker-log/
+
+ref: <https://www.axllent.org/docs/clear-docker-log/>
+
 - method 1
+
 ```shell
 LOG=$(docker inspect -f '{{.LogPath}}' "$CONTAINER" 2> /dev/null)
 truncate -s 0 "$LOG"
@@ -218,18 +257,23 @@ ex:
 LOG=$(sudo docker inspect -f '{{.LogPath}}' rabbit2> /dev/null)
 sudo truncate -s 0 "$LOG"
 ```
+
 - method 2
+
 ```shell
 echo "" > $(docker inspect --format='{{.LogPath}}'  <container_name_or_id>)
 ```
 
 ## Restart EXITED DOCKER
+
 ```shell
 docker start $(docker ps -a -q --filter "status=exited")
 ```
 
 ## Prune unused Docker objects
-ref:https://docs.docker.com/config/pruning/
+
+ref:<https://docs.docker.com/config/pruning/>
+
 ```shell
 docker image prune -a
 docker volume prune -f

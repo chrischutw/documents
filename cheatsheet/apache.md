@@ -1,7 +1,7 @@
 # Apache Cheatsheet
 
-
 ## LogFormat
+
 ```shell
 %a:          Remote IP-address
 %A:          Local IP-address
@@ -34,5 +34,3 @@
 %v:          The canonical ServerName of the server serving the request.
 %V:          The server name according to the UseCanonicalName setting.
 ```
-
- 

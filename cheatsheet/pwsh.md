@@ -1,7 +1,9 @@
 # Powershell Cheatsheet
 
 ## Install PowerShell in Ubuntu
-ref: https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.3
+
+ref: <https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.3>
+
 ```shell
 # Update the list of packages
 sudo apt-get update
@@ -19,9 +21,4 @@ sudo apt-get update
 sudo apt-get install -y powershell
 # Start PowerShell
 pwsh
-```
-
-## 
-```shell
-Get-DnsServerResourceRecord -Name "cloud-gcp" -ZoneName "sinyi.com.tw" -RRType "A"
 ```
