@@ -1,5 +1,21 @@
 # Useful command
 
+## kubectl replace tls secret
+
+```shell
+k create secret tls $secretName --cert=$cert --key=$key -n $namesapce --dry-run=client -o yaml | kubectl -$namesapce apply -f  -
+```
+
+## https proxy for systemd service
+
+```shell
+vim /etc/systemd/system.conf
+vim /etc/systemd/user.conf
+# add the following 
+# DefaultEnvironment="http_proxy=http://proxy.example.com:8080" "https_proxy=http://proxy.example.com:8080"
+systemctl daemon-reexec
+```
+
 ## Auto completion
 
 ```shell
