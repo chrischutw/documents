@@ -53,10 +53,16 @@ chsh -s $(which fish)
 
 ```shell
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-fisher install IlanCosman/tide@v5
+fisher install IlanCosman/tide@v6
 fisher install jethrokuan/z
 fisher install andreiborisov/sponge
 fisher install jorgebucaran/autopair.fish
+```
+
+### tide configuration
+
+```shell
+tide configure
 ```
 
 ### Install fzf
