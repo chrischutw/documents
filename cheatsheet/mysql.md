@@ -1,5 +1,18 @@
 # MYSQL command cheatsheet
 
+## list all users
+
+```shell
+SELECT User, Host FROM mysql.user;
+```
+
+## grant all priviliged
+
+```shell
+
+
+```
+
 ## Slave super read only
 
 ref: <https://bugs.mysql.com/bug.php?id=84081>
@@ -181,4 +194,58 @@ SELECT * FROM events where event_date `< or >` '2018-01-01' ;
 ```shell
 /etc/sysctl.d
 /etc/security/limit.d
+```
+
+## Calculate DB size
+
+```shell
+SELECT table_schema "Database", SUM(data_length + index_length) / 1024 / 1024 "Size (MB)" FROM information_schema.tables GROUP BY table_schema;
+```
+
+## Calculate table size
+
+```shell
+SELECT table_name AS "Table", round(((data_length + index_length) / 1024 / 1024), 2) AS "Size (MB)" FROM information_schema.tables WHERE table_schema = `Database`;
+```
+
+## mysqldump
+
+ref: <https://code.yidas.com/mysqldump/>
+
+```shell
+# dump all databases
+mysqldump -u root -p --all-database > all_database.sql
+
+# dump multiple databases
+mysqldump -u root -p --databases db1 db2 db3 > backup.sql
+
+# dump single database
+mysqldump -u root -p --databases db > db.sql
+
+# dump with 1356 error
+mysqldump -u root --force -p --databases db > db.sql
+```
+
+## mysql restore
+
+ref: <https://ubiq.co/database-blog/mysql-copy-database/>
+
+```shell
+mysql -p `database` < database.sql
+```
+
+## Previleges
+
+ref: <https://www.prisma.io/dataguide/mysql/authentication-and-authorization/privilege-management>
+
+```shell
+# show grants from specific user
+SHOW GRANTS for `user`;
+
+# grant previliges
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, ALTER ON `database`.* TO 'user'@'%'
+
+# revoke previliges
+REVOKE SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, REFERENCES, ALTER ON `database`.* FROM 'user'@'%'
+
 ```

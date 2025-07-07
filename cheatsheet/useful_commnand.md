@@ -1,5 +1,18 @@
 # Useful command
 
+## Cron runs on the last day of month
+
+```shell
+# 每月 28~31 號執行，僅在最後一天執行任務
+0 0 28-31 * * [ "$(date +\%d -d tomorrow)" = "01" ] && /path/to/your/script.sh
+```
+
+## kubectl decode all secret values
+
+```shell
+kubectl get secret my-secret -n default -o json | jq -r '.data | to_entries[] | "\(.key): \(.value | @base64d)"'
+```
+
 ## kubectl replace tls secret
 
 ```shell
