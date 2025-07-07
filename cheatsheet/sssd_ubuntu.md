@@ -10,12 +10,15 @@
 2. Enable sssd: <https://allthings.how/how-to-enable-active-directory-in-windows-11/>
 
 ## CentOS 7 SSSD configuration reference
+
 <https://access.redhat.com/documentation/zh-tw/red_hat_enterprise_linux/7/html/system-level_authentication_guide/sssd-multiple-config-files>
 
 ## Ubuntu 22 SSSD configuration
+
 <https://ubuntu.com/server/docs/service-sssd-ldap>
 
 ## sssd doc
+
 <https://sssd.io/>
 
 ## Prerequisite
